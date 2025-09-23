@@ -1,0 +1,9 @@
+## post request for app controller
+POST http://localhost:3000/users
+Content-Type:application/json
+{
+    "firstName":"Abdullah",
+    "lastName":"Alameer",
+    "email":"Abdoo121393@doe.com",
+    "password":"Password12@3"
+}
