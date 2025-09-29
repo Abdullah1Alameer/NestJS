@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { CreateUserDto } from './users/dtos/create-user.dto';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder,SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,23 @@ async function bootstrap() {
     forbidNonWhitelisted:true,
     transform:true,
   }));
+  /**
+   * Swagger Config
+   */
+
+  const config = new DocumentBuilder()
+  .setTitle("Abo3abed-API App Blog")
+  .setDescription("Use the base API URL as http://localhost:3000")
+  .setTermsOfService('http://localhost:3000-terms-of-service')
+  .setLicense('MIT License',
+    'https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt'
+  ).addServer('http://localhost:3000')
+  .setVersion('1.0')
+  .build();
+
+  const document = SwaggerModule.createDocument(app,config);
+
+  SwaggerModule.setup('api',app,document);
   await app.listen(3000);
 }
 bootstrap();
