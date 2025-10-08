@@ -20,7 +20,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUsersDto } from './dtos/patch-user.dto';
 import { UsersService } from './providers/users.service';
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 @Controller('users')
 @ApiTags('Users')
 export class UsersController {
@@ -28,6 +28,11 @@ export class UsersController {
 @Get('/:id')
 @ApiOperation({
     summary:'Fetches a list of registered users on the application '
+})
+@ApiResponse({
+    status:200,
+    description:'Users fetched successfully based on the query'
+
 })
 @ApiQuery({
     name:"limit",
@@ -57,9 +62,7 @@ public getUsers(
     }
     @Post()
     public creatUsers(@Body()createUserDto:CreateUserDto){
-        console.log( createUserDto instanceof CreateUserDto);
-        return 'you sent a Post request to users endpoits and Abdullah 3mk';
-        
+        return this.userService.createUser(createUserDto)
     }
     @Patch()
     public patchUser(@Body() patchUsersDto:PatchUsersDto){

@@ -6,25 +6,27 @@ export class CreateUserDto{
 @IsNotEmpty()
 @MinLength(3)
 @MaxLength(96)
-    firstName:String;
+    firstName:string;
 
 @IsNotEmpty()
 @IsString()
 @IsOptional()
 @MinLength(3)
 @MaxLength(96)
-    lastName?:String;
+    lastName?:string;
 
 @IsNotEmpty()
 @IsString()    
 @IsEmail()
-    email:String;
+@MaxLength(96)
+    email:string;
 
 @IsNotEmpty()
 @IsString()
 @MinLength(8)
+@MaxLength(96)
 @Matches(/^(?=.*d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,{
     message:'Minmim 8 char at least one latter, one num and one special char.'
 })
-    password:String;
+    password:string;
 }
